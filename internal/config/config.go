@@ -12,7 +12,9 @@ type Config struct {
 }
 
 type ServerConfig struct {
-	Port string
+	GATEWAY_PORT string
+	Order_Port string
+	Auth_Port  string
 }
 
 type DatabaseConfig struct {
@@ -29,7 +31,9 @@ func (c *Config) Load() error {
 		return err
 	}
 
-	c.Server.Port = ":" + os.Getenv("SERVER_PORT")
+	c.Server.GATEWAY_PORT = ":" + os.Getenv("GATEWAY_PORT")
+	c.Server.Order_Port = ":" + os.Getenv("ORDER_PORT")
+	c.Server.Auth_Port = ":" + os.Getenv("AUTH_PORT")
 	c.Database.Host = os.Getenv("DB_HOST")
 	c.Database.Port = os.Getenv("DB_PORT")
 	c.Database.User = os.Getenv("DB_USER")
