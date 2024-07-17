@@ -1,7 +1,7 @@
 package authhandler
 
 import (
-	sendcode "gateway/api/handler/sendCode"
+	sendcode "gateway/api/sendCode"
 	pb "gateway/genprotos/auth_pb"
 	"time"
 
@@ -142,14 +142,14 @@ func (h *AuthHandler) UpdateProfileHandler(c *gin.Context) {
 
 // @Summary Reset user password
 // @Description Reset the password for a user
-// @Tags user
+// @Tags auth
 // @Accept json
 // @Produce json
 // @Param request body pb.ResetPasswordRequest true "Password reset information"
 // @Success 200 {object} pb.ResetPasswordResponse
 // @Failure 400 {object} gin.H
 // @Failure 500 {object} gin.H
-// @Router /user/reset-password [post]
+// @Router /auth/reset-password [post]
 func (h *AuthHandler) ResetPasswordHandler(c *gin.Context) {
 	h.logger.Info("ResetPasswordHandler")
 
@@ -162,10 +162,24 @@ func (h *AuthHandler) ResetPasswordHandler(c *gin.Context) {
 		return
 	}
 
-	_, err := r.GetVerificationCode(req.Email)
+	code, err := r.GetVerificationCode(req.Email)
 	if err != nil {
 		c.IndentedJSON(400, gin.H{
-			"message": "Verification code is incorrect",
+			"error": err.Error(),
+		})
+		return
+	}
+
+	if req.VerifyCode != code {
+		c.IndentedJSON(400, gin.H{
+			"error": "Verify code",
+		})
+		return
+	}
+
+	if req.NewPassword != req.ConfirmPassword {
+		c.IndentedJSON(400, gin.H{
+			"error": "Passwords do not match",
 		})
 		return
 	}
@@ -274,7 +288,7 @@ func (h *AuthHandler) GetAccessToResetPassword(c *gin.Context) {
 		return
 	}
 
-	err = r.SaveVerificationCode(req.Email, code, time.Minute)
+	err = r.SaveVerificationCode(req.Email, code, 2*time.Minute)
 	if err != nil {
 		c.IndentedJSON(500, gin.H{
 			"error": err.Error(),

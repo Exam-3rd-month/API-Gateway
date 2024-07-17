@@ -44,18 +44,15 @@ func (h *Orderhandler) AddReviewHandler(c *gin.Context) {
 // @Tags review
 // @Accept json
 // @Produce json
-// @Param kitchen_id path string true "Kitchen ID"
+// @Param request body pb.ListReviewsRequest true "Additional request parameters"
 // @Success 200 {object} pb.ListReviewsResponse
 // @Failure 400 {object} gin.H
 // @Failure 500 {object} gin.H
-// @Router /review/kitchen/{kitchen_id} [get]
+// @Router /review/kitchen/{kitchen_id} [post]
 func (h *Orderhandler) ListReviewsHandler(c *gin.Context) {
 	h.logger.Info("ListReviewsHandler")
-	kitchen_id := c.Param("kitchen_id")
 
-	var req = pb.ListReviewsRequest{
-		KitchenId: kitchen_id,
-	}
+	var req pb.ListReviewsRequest
 
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.IndentedJSON(400, gin.H{

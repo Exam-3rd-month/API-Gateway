@@ -85,6 +85,7 @@ func (a *API) NewRouter(config *config.Config, logger *slog.Logger) *gin.Engine 
 		auth.POST("/login", handler.AuthHandler.LoginHandler)
 		auth.GET("/is/valid/token/:user_id", handler.AuthHandler.IsValidToken)
 		auth.POST("/logout/:user_id", handler.AuthHandler.Logout)
+		auth.POST("/reset-password", handler.AuthHandler.ResetPasswordHandler)
 	}
 
 	// Auth-Service
@@ -92,7 +93,6 @@ func (a *API) NewRouter(config *config.Config, logger *slog.Logger) *gin.Engine 
 	{
 		user.GET("/profile/:id", handler.AuthHandler.GetProfileHandler)
 		user.PUT("/profile/:id", handler.AuthHandler.UpdateProfileHandler)
-		user.POST("/reset-password", handler.AuthHandler.ResetPasswordHandler)
 		user.GET("/:user_id/activity", handler.OrderHandler.GetUserActivityHandler)
 	}
 
@@ -101,8 +101,8 @@ func (a *API) NewRouter(config *config.Config, logger *slog.Logger) *gin.Engine 
 		kitchen.POST("", handler.AuthHandler.CreateKitchenHandler)
 		kitchen.PUT("/:kitchen_id", handler.AuthHandler.UpdateKitchenHandler)
 		kitchen.GET("/:kitchen_id", handler.AuthHandler.GetKitchenHandler)
+		kitchen.POST("/search", handler.AuthHandler.SearchKitchensHandler)
 		kitchen.POST("/:kitchen_id/working-hours", handler.OrderHandler.CreateKitchenWorkingHoursHandler)
-		// kitchen.GET("/:kitchen_id/statistics", handler.OrderHandler.GetKitchenStatisticsHandler)
 	}
 
 	// Order-Service
@@ -126,7 +126,7 @@ func (a *API) NewRouter(config *config.Config, logger *slog.Logger) *gin.Engine 
 	review := router.Group("/review")
 	{
 		review.POST("", handler.OrderHandler.AddReviewHandler)
-		review.GET("/kitchen/:kitchen_id", handler.OrderHandler.ListReviewsHandler)
+		review.POST("/kitchen/:kitchen_id", handler.OrderHandler.ListReviewsHandler)
 	}
 
 	payment := router.Group("/payment")
@@ -138,7 +138,7 @@ func (a *API) NewRouter(config *config.Config, logger *slog.Logger) *gin.Engine 
 }
 
 func VerifyJWTMiddleware(ctx *gin.Context) {
-	if ctx.Request.URL.Path == "/auth/login" || ctx.Request.URL.Path == "/auth/register" || strings.HasPrefix(ctx.Request.URL.Path, "/swagger") {
+	if ctx.Request.URL.Path == "/auth/login" || ctx.Request.URL.Path == "/auth/register" ||ctx.Request.URL.Path == "/auth/reset-password-access"||ctx.Request.URL.Path == "/auth/reset-password" || strings.HasPrefix(ctx.Request.URL.Path, "/swagger") {
 		ctx.Next()
 		return
 	}

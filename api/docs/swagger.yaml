@@ -178,7 +178,7 @@ definitions:
         type: string
       new_password:
         type: string
-      verify_password:
+      verify_code:
         type: string
     type: object
   gateway_genprotos_auth_pb.ResetPasswordResponse:
@@ -460,6 +460,15 @@ definitions:
       price:
         type: number
     type: object
+  gateway_genprotos_order_pb.GetOrderByKitchenIdRequest:
+    properties:
+      kitchen_id:
+        type: string
+      limit:
+        type: integer
+      page:
+        type: integer
+    type: object
   gateway_genprotos_order_pb.GetOrderByKitchenIdResponse:
     properties:
       limit:
@@ -480,6 +489,15 @@ definitions:
       total_spent:
         type: string
     type: object
+  gateway_genprotos_order_pb.ListDishesRequest:
+    properties:
+      kitchen_id:
+        type: string
+      limit:
+        type: integer
+      page:
+        type: integer
+    type: object
   gateway_genprotos_order_pb.ListDishesResponse:
     properties:
       dishes:
@@ -493,6 +511,15 @@ definitions:
       total:
         type: integer
     type: object
+  gateway_genprotos_order_pb.ListOfOrdersRequest:
+    properties:
+      limit:
+        type: integer
+      page:
+        type: integer
+      user_id:
+        type: string
+    type: object
   gateway_genprotos_order_pb.ListOfOrdersResponse:
     properties:
       limit:
@@ -504,6 +531,15 @@ definitions:
       page:
         type: integer
       total:
+        type: integer
+    type: object
+  gateway_genprotos_order_pb.ListReviewsRequest:
+    properties:
+      kitchen_id:
+        type: string
+      limit:
+        type: integer
+      page:
         type: integer
     type: object
   gateway_genprotos_order_pb.ListReviewsResponse:
@@ -812,6 +848,36 @@ paths:
       summary: Register a new user
       tags:
       - auth
+  /auth/reset-password:
+    post:
+      consumes:
+      - application/json
+      description: Reset the password for a user
+      parameters:
+      - description: Password reset information
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/gateway_genprotos_auth_pb.ResetPasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_auth_pb.ResetPasswordResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Reset user password
+      tags:
+      - auth
   /auth/reset-password-access:
     post:
       consumes:
@@ -976,11 +1042,12 @@ paths:
       - application/json
       description: Get a list of dishes for a specific kitchen
       parameters:
-      - description: Kitchen ID
-        in: path
-        name: kitchen_id
+      - description: Additional request parameters
+        in: body
+        name: request
         required: true
-        type: string
+        schema:
+          $ref: '#/definitions/gateway_genprotos_order_pb.ListDishesRequest'
       produces:
       - application/json
       responses:
@@ -1254,11 +1321,12 @@ paths:
       - application/json
       description: Get orders for a specific kitchen
       parameters:
-      - description: Kitchen ID
-        in: path
-        name: kitchen_id
+      - description: GetOrderByKitchenIdRequest
+        in: body
+        name: request
         required: true
-        type: string
+        schema:
+          $ref: '#/definitions/gateway_genprotos_order_pb.GetOrderByKitchenIdRequest'
       produces:
       - application/json
       responses:
@@ -1283,11 +1351,12 @@ paths:
       - application/json
       description: Get a list of orders for a specific user
       parameters:
-      - description: User ID
-        in: path
-        name: user_id
+      - description: Additional request parameters
+        in: body
+        name: request
         required: true
-        type: string
+        schema:
+          $ref: '#/definitions/gateway_genprotos_order_pb.ListOfOrdersRequest'
       produces:
       - application/json
       responses:
@@ -1367,16 +1436,17 @@ paths:
       tags:
       - review
   /review/kitchen/{kitchen_id}:
-    get:
+    post:
       consumes:
       - application/json
       description: Get a list of reviews for a specific kitchen
       parameters:
-      - description: Kitchen ID
-        in: path
-        name: kitchen_id
+      - description: Additional request parameters
+        in: body
+        name: request
         required: true
-        type: string
+        schema:
+          $ref: '#/definitions/gateway_genprotos_order_pb.ListReviewsRequest'
       produces:
       - application/json
       responses:
@@ -1477,36 +1547,6 @@ paths:
           schema:
             $ref: '#/definitions/gin.H'
       summary: Update user profile
-      tags:
-      - user
-  /user/reset-password:
-    post:
-      consumes:
-      - application/json
-      description: Reset the password for a user
-      parameters:
-      - description: Password reset information
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/gateway_genprotos_auth_pb.ResetPasswordRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/gateway_genprotos_auth_pb.ResetPasswordResponse'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/gin.H'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/gin.H'
-      summary: Reset user password
       tags:
       - user
 schemes:

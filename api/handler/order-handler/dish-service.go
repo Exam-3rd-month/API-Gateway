@@ -117,18 +117,15 @@ func (h *Orderhandler) DeleteDishHandler(c *gin.Context) {
 // @Tags dish
 // @Accept json
 // @Produce json
-// @Param kitchen_id path string true "Kitchen ID"
+// @Param request body pb.ListDishesRequest true "Additional request parameters"
 // @Success 200 {object} pb.ListDishesResponse
 // @Failure 400 {object} gin.H
 // @Failure 500 {object} gin.H
 // @Router /dish/kitchen/{kitchen_id} [get]
 func (h *Orderhandler) ListDishesHandler(c *gin.Context) {
 	h.logger.Info("ListDishesHandler")
-	kitchen_id := c.Param("kitchen_id")
 
-	var req = pb.ListDishesRequest{
-		KitchenId: kitchen_id,
-	}
+	var req pb.ListDishesRequest
 
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.IndentedJSON(400, gin.H{

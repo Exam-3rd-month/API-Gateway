@@ -81,18 +81,15 @@ func (h *Orderhandler) UpdateOrderStatusHandler(c *gin.Context) {
 // @Tags order
 // @Accept json
 // @Produce json
-// @Param user_id path string true "User ID"
+// @Param request body pb.ListOfOrdersRequest true "Additional request parameters"
 // @Success 200 {object} pb.ListOfOrdersResponse
 // @Failure 400 {object} gin.H
 // @Failure 500 {object} gin.H
 // @Router /order/user/{user_id} [get]
 func (h *Orderhandler) ListOfOrdersHandler(c *gin.Context) {
 	h.logger.Info("ListOfOrdersHandler")
-	user_id := c.Param("user_id")
 
-	var req = pb.ListOfOrdersRequest{
-		UserId: user_id,
-	}
+	var req pb.ListOfOrdersRequest
 
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.IndentedJSON(400, gin.H{
@@ -117,18 +114,15 @@ func (h *Orderhandler) ListOfOrdersHandler(c *gin.Context) {
 // @Tags order
 // @Accept json
 // @Produce json
-// @Param kitchen_id path string true "Kitchen ID"
+// @Param request body pb.GetOrderByKitchenIdRequest true "GetOrderByKitchenIdRequest"
 // @Success 200 {object} pb.GetOrderByKitchenIdResponse
 // @Failure 400 {object} gin.H
 // @Failure 500 {object} gin.H
 // @Router /order/kitchen/{kitchen_id} [get]
 func (h *Orderhandler) GetOrderByKitchenIdHandler(c *gin.Context) {
 	h.logger.Info("GetOrderByKitchenIdHandler")
-	kitchen_id := c.Param("kitchen_id")
 
-	var req = pb.GetOrderByKitchenIdRequest{
-		KitchenId: kitchen_id,
-	}
+	var req pb.GetOrderByKitchenIdRequest
 
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.IndentedJSON(400, gin.H{

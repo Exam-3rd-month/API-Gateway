@@ -192,6 +192,52 @@ const docTemplate = `{
                 }
             }
         },
+        "/auth/reset-password": {
+            "post": {
+                "description": "Reset the password for a user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Reset user password",
+                "parameters": [
+                    {
+                        "description": "Password reset information",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/gateway_genprotos_auth_pb.ResetPasswordRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/gateway_genprotos_auth_pb.ResetPasswordResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    }
+                }
+            }
+        },
         "/auth/reset-password-access": {
             "post": {
                 "description": "Send a verification code to the user's email for password reset",
@@ -299,11 +345,13 @@ const docTemplate = `{
                 "summary": "List dishes",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "Kitchen ID",
-                        "name": "kitchen_id",
-                        "in": "path",
-                        "required": true
+                        "description": "Additional request parameters",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/gateway_genprotos_order_pb.ListDishesRequest"
+                        }
                     }
                 ],
                 "responses": {
@@ -817,11 +865,13 @@ const docTemplate = `{
                 "summary": "Get orders for a kitchen",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "Kitchen ID",
-                        "name": "kitchen_id",
-                        "in": "path",
-                        "required": true
+                        "description": "GetOrderByKitchenIdRequest",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/gateway_genprotos_order_pb.GetOrderByKitchenIdRequest"
+                        }
                     }
                 ],
                 "responses": {
@@ -861,11 +911,13 @@ const docTemplate = `{
                 "summary": "List orders for a user",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "User ID",
-                        "name": "user_id",
-                        "in": "path",
-                        "required": true
+                        "description": "Additional request parameters",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/gateway_genprotos_order_pb.ListOfOrdersRequest"
+                        }
                     }
                 ],
                 "responses": {
@@ -1036,7 +1088,7 @@ const docTemplate = `{
             }
         },
         "/review/kitchen/{kitchen_id}": {
-            "get": {
+            "post": {
                 "description": "Get a list of reviews for a specific kitchen",
                 "consumes": [
                     "application/json"
@@ -1050,11 +1102,13 @@ const docTemplate = `{
                 "summary": "List reviews for a kitchen",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "Kitchen ID",
-                        "name": "kitchen_id",
-                        "in": "path",
-                        "required": true
+                        "description": "Additional request parameters",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/gateway_genprotos_order_pb.ListReviewsRequest"
+                        }
                     }
                 ],
                 "responses": {
@@ -1151,52 +1205,6 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/gateway_genprotos_auth_pb.UpdateProfileResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/gin.H"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/gin.H"
-                        }
-                    }
-                }
-            }
-        },
-        "/user/reset-password": {
-            "post": {
-                "description": "Reset the password for a user",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "user"
-                ],
-                "summary": "Reset user password",
-                "parameters": [
-                    {
-                        "description": "Password reset information",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/gateway_genprotos_auth_pb.ResetPasswordRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/gateway_genprotos_auth_pb.ResetPasswordResponse"
                         }
                     },
                     "400": {
@@ -1528,7 +1536,7 @@ const docTemplate = `{
                 "new_password": {
                     "type": "string"
                 },
-                "verify_password": {
+                "verify_code": {
                     "type": "string"
                 }
             }
@@ -1962,6 +1970,20 @@ const docTemplate = `{
                 }
             }
         },
+        "gateway_genprotos_order_pb.GetOrderByKitchenIdRequest": {
+            "type": "object",
+            "properties": {
+                "kitchen_id": {
+                    "type": "string"
+                },
+                "limit": {
+                    "type": "integer"
+                },
+                "page": {
+                    "type": "integer"
+                }
+            }
+        },
         "gateway_genprotos_order_pb.GetOrderByKitchenIdResponse": {
             "type": "object",
             "properties": {
@@ -1993,6 +2015,20 @@ const docTemplate = `{
                 }
             }
         },
+        "gateway_genprotos_order_pb.ListDishesRequest": {
+            "type": "object",
+            "properties": {
+                "kitchen_id": {
+                    "type": "string"
+                },
+                "limit": {
+                    "type": "integer"
+                },
+                "page": {
+                    "type": "integer"
+                }
+            }
+        },
         "gateway_genprotos_order_pb.ListDishesResponse": {
             "type": "object",
             "properties": {
@@ -2013,6 +2049,20 @@ const docTemplate = `{
                 }
             }
         },
+        "gateway_genprotos_order_pb.ListOfOrdersRequest": {
+            "type": "object",
+            "properties": {
+                "limit": {
+                    "type": "integer"
+                },
+                "page": {
+                    "type": "integer"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        },
         "gateway_genprotos_order_pb.ListOfOrdersResponse": {
             "type": "object",
             "properties": {
@@ -2029,6 +2079,20 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "gateway_genprotos_order_pb.ListReviewsRequest": {
+            "type": "object",
+            "properties": {
+                "kitchen_id": {
+                    "type": "string"
+                },
+                "limit": {
+                    "type": "integer"
+                },
+                "page": {
                     "type": "integer"
                 }
             }
