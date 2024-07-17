@@ -1,4 +1,1522 @@
+basePath: /
+definitions:
+  gateway_genprotos_auth_pb.CreateKitchenRequest:
+    properties:
+      address:
+        type: string
+      cuisine_type:
+        type: string
+      description:
+        type: string
+      name:
+        type: string
+      owner_id:
+        type: string
+      phone_number:
+        type: string
+    type: object
+  gateway_genprotos_auth_pb.CreateKitchenResponse:
+    properties:
+      address:
+        type: string
+      created_at:
+        type: string
+      cuisine_type:
+        type: string
+      description:
+        type: string
+      kitchen_id:
+        type: string
+      name:
+        type: string
+      owner_id:
+        type: string
+      phone_number:
+        type: string
+      rating:
+        type: number
+    type: object
+  gateway_genprotos_auth_pb.GetKitchenResponse:
+    properties:
+      address:
+        type: string
+      created_at:
+        type: string
+      cuisine_type:
+        type: string
+      description:
+        type: string
+      kitchen_id:
+        type: string
+      name:
+        type: string
+      owner_id:
+        type: string
+      phone_number:
+        type: string
+      rating:
+        type: number
+      total_orders:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  gateway_genprotos_auth_pb.GetProfileResponse:
+    properties:
+      address:
+        type: string
+      created_at:
+        type: string
+      email:
+        type: string
+      full_name:
+        type: string
+      phone_number:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+      user_type:
+        type: string
+      username:
+        type: string
+    type: object
+  gateway_genprotos_auth_pb.IsValidTokenResponse:
+    properties:
+      valid:
+        type: boolean
+    type: object
+  gateway_genprotos_auth_pb.IsValidUserRequest:
+    properties:
+      email:
+        type: string
+    type: object
+  gateway_genprotos_auth_pb.KitchenListItem:
+    properties:
+      cuisine_type:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      rating:
+        type: number
+      total_orders:
+        type: integer
+    type: object
+  gateway_genprotos_auth_pb.ListKitchensRequest:
+    properties:
+      limit:
+        type: integer
+      page:
+        type: integer
+    type: object
+  gateway_genprotos_auth_pb.ListKitchensResponse:
+    properties:
+      kitchens:
+        items:
+          $ref: '#/definitions/gateway_genprotos_auth_pb.KitchenListItem'
+        type: array
+      limit:
+        type: integer
+      page:
+        type: integer
+      total:
+        type: integer
+    type: object
+  gateway_genprotos_auth_pb.LoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  gateway_genprotos_auth_pb.LoginResponse:
+    properties:
+      access_token:
+        type: string
+    type: object
+  gateway_genprotos_auth_pb.LogoutResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  gateway_genprotos_auth_pb.RegisterRequest:
+    properties:
+      email:
+        type: string
+      full_name:
+        type: string
+      password:
+        type: string
+      user_type:
+        type: string
+      username:
+        type: string
+    type: object
+  gateway_genprotos_auth_pb.RegisterResponse:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      full_name:
+        type: string
+      user_id:
+        type: string
+      user_type:
+        type: string
+      username:
+        type: string
+    type: object
+  gateway_genprotos_auth_pb.ResetPasswordRequest:
+    properties:
+      confirm_password:
+        type: string
+      email:
+        type: string
+      new_password:
+        type: string
+      verify_password:
+        type: string
+    type: object
+  gateway_genprotos_auth_pb.ResetPasswordResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  gateway_genprotos_auth_pb.SearchKitchensRequest:
+    properties:
+      limit:
+        type: integer
+      name:
+        type: string
+      page:
+        type: integer
+    type: object
+  gateway_genprotos_auth_pb.SearchKitchensResponse:
+    properties:
+      kitchens:
+        items:
+          $ref: '#/definitions/gateway_genprotos_auth_pb.KitchenListItem'
+        type: array
+      limit:
+        type: integer
+      page:
+        type: integer
+      total:
+        type: integer
+    type: object
+  gateway_genprotos_auth_pb.UpdateKitchenRequest:
+    properties:
+      address:
+        type: string
+      description:
+        type: string
+      kitchen_id:
+        type: string
+      name:
+        type: string
+      phone_number:
+        type: string
+    type: object
+  gateway_genprotos_auth_pb.UpdateKitchenResponse:
+    properties:
+      address:
+        type: string
+      cuisine_type:
+        type: string
+      description:
+        type: string
+      kitchen_id:
+        type: string
+      name:
+        type: string
+      owner_id:
+        type: string
+      phone_number:
+        type: string
+      rating:
+        type: number
+      updated_at:
+        type: string
+    type: object
+  gateway_genprotos_auth_pb.UpdateProfileRequest:
+    properties:
+      address:
+        type: string
+      full_name:
+        type: string
+      phone_number:
+        type: string
+      user_id:
+        type: string
+    type: object
+  gateway_genprotos_auth_pb.UpdateProfileResponse:
+    properties:
+      address:
+        type: string
+      email:
+        type: string
+      full_name:
+        type: string
+      phone_number:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+      user_type:
+        type: string
+      username:
+        type: string
+    type: object
+  gateway_genprotos_order_pb.AddDishRequest:
+    properties:
+      available:
+        type: boolean
+      category:
+        type: string
+      description:
+        type: string
+      ingredients:
+        items:
+          type: string
+        type: array
+      kitchen_id:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+    type: object
+  gateway_genprotos_order_pb.AddDishResponse:
+    properties:
+      available:
+        type: boolean
+      category:
+        type: string
+      created_at:
+        type: string
+      description:
+        type: string
+      dish_id:
+        type: string
+      ingredients:
+        items:
+          type: string
+        type: array
+      kitchen_id:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+    type: object
+  gateway_genprotos_order_pb.AddReviewRequest:
+    properties:
+      comment:
+        type: string
+      kitchen_id:
+        type: string
+      order_id:
+        type: string
+      rating:
+        type: number
+      user_id:
+        type: string
+    type: object
+  gateway_genprotos_order_pb.AddReviewResponse:
+    properties:
+      comment:
+        type: string
+      created_at:
+        type: string
+      kitchen_id:
+        type: string
+      order_id:
+        type: string
+      rating:
+        type: number
+      rewiev_id:
+        type: string
+      user_id:
+        type: string
+    type: object
+  gateway_genprotos_order_pb.Allergens:
+    properties:
+      name:
+        type: string
+    type: object
+  gateway_genprotos_order_pb.CreateKitchenWorkingHoursRequest:
+    properties:
+      kitchen_id:
+        type: string
+      working_hours:
+        items:
+          $ref: '#/definitions/gateway_genprotos_order_pb.WorkingHoursByDay'
+        type: array
+    type: object
+  gateway_genprotos_order_pb.CreateKitchenWorkingHoursResponse:
+    properties:
+      created_at:
+        type: string
+      kitchen_id:
+        type: string
+      working_hours:
+        items:
+          $ref: '#/definitions/gateway_genprotos_order_pb.WorkingHoursByDay'
+        type: array
+    type: object
+  gateway_genprotos_order_pb.CreateOrderRequest:
+    properties:
+      delivery_address:
+        type: string
+      delivery_time:
+        type: string
+      items:
+        items:
+          $ref: '#/definitions/gateway_genprotos_order_pb.OrderRequest'
+        type: array
+      kitchen_id:
+        type: string
+      user_id:
+        type: string
+    type: object
+  gateway_genprotos_order_pb.CreateOrderResponse:
+    properties:
+      created_at:
+        type: string
+      delivery_address:
+        type: string
+      delivery_time:
+        type: string
+      items:
+        items:
+          $ref: '#/definitions/gateway_genprotos_order_pb.OrderResponse'
+        type: array
+      kitchen_id:
+        type: string
+      order_id:
+        type: string
+      status:
+        type: string
+      total_amount:
+        type: number
+      user_id:
+        type: string
+    type: object
+  gateway_genprotos_order_pb.CreatePaymentRequest:
+    properties:
+      card_number:
+        type: string
+      cvv:
+        type: string
+      expire_date:
+        type: string
+      order_id:
+        type: string
+      payment_method:
+        type: string
+    type: object
+  gateway_genprotos_order_pb.CreatePaymentResponse:
+    properties:
+      amount:
+        type: number
+      created_at:
+        type: string
+      kitchen_id:
+        type: string
+      order_id:
+        type: string
+      payment_id:
+        type: string
+      status:
+        type: string
+      transaction_id:
+        type: string
+    type: object
+  gateway_genprotos_order_pb.DeleteDishResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  gateway_genprotos_order_pb.DietaryInfo:
+    properties:
+      name:
+        type: string
+    type: object
+  gateway_genprotos_order_pb.Dish:
+    properties:
+      available:
+        type: boolean
+      category:
+        type: string
+      dish_id:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+    type: object
+  gateway_genprotos_order_pb.GetOrderByKitchenIdResponse:
+    properties:
+      limit:
+        type: integer
+      orders:
+        items:
+          $ref: '#/definitions/gateway_genprotos_order_pb.Order'
+        type: array
+      page:
+        type: integer
+      total:
+        type: integer
+    type: object
+  gateway_genprotos_order_pb.GetUserActivityResponse:
+    properties:
+      total_orders:
+        type: integer
+      total_spent:
+        type: string
+    type: object
+  gateway_genprotos_order_pb.ListDishesResponse:
+    properties:
+      dishes:
+        items:
+          $ref: '#/definitions/gateway_genprotos_order_pb.Dish'
+        type: array
+      limit:
+        type: integer
+      page:
+        type: integer
+      total:
+        type: integer
+    type: object
+  gateway_genprotos_order_pb.ListOfOrdersResponse:
+    properties:
+      limit:
+        type: integer
+      orders:
+        items:
+          $ref: '#/definitions/gateway_genprotos_order_pb.Order'
+        type: array
+      page:
+        type: integer
+      total:
+        type: integer
+    type: object
+  gateway_genprotos_order_pb.ListReviewsResponse:
+    properties:
+      average_rating:
+        type: number
+      limit:
+        type: integer
+      page:
+        type: integer
+      reviews:
+        items:
+          $ref: '#/definitions/gateway_genprotos_order_pb.Review'
+        type: array
+      total:
+        type: integer
+    type: object
+  gateway_genprotos_order_pb.NutritionInfo:
+    properties:
+      calories:
+        type: string
+      carbohydrates:
+        type: string
+      fat:
+        type: string
+      protein:
+        type: string
+    type: object
+  gateway_genprotos_order_pb.Order:
+    properties:
+      created_at:
+        type: string
+      delivery_address:
+        type: string
+      kitchen_id:
+        type: string
+      order_id:
+        type: string
+      status:
+        type: string
+      total_amount:
+        type: number
+    type: object
+  gateway_genprotos_order_pb.OrderRequest:
+    properties:
+      dish_id:
+        type: string
+      quantity:
+        type: integer
+    type: object
+  gateway_genprotos_order_pb.OrderResponse:
+    properties:
+      dish_id:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+      quantity:
+        type: string
+    type: object
+  gateway_genprotos_order_pb.Review:
+    properties:
+      comment:
+        type: string
+      created_at:
+        type: string
+      rating:
+        type: number
+      review_id:
+        type: string
+      user_name:
+        type: string
+    type: object
+  gateway_genprotos_order_pb.UpdateDishNutritionInfoRequest:
+    properties:
+      allergens:
+        items:
+          $ref: '#/definitions/gateway_genprotos_order_pb.Allergens'
+        type: array
+      dietary_info:
+        items:
+          $ref: '#/definitions/gateway_genprotos_order_pb.DietaryInfo'
+        type: array
+      dish_id:
+        type: string
+      nutrition_info:
+        items:
+          $ref: '#/definitions/gateway_genprotos_order_pb.NutritionInfo'
+        type: array
+    type: object
+  gateway_genprotos_order_pb.UpdateDishNutritionInfoResponse:
+    properties:
+      allergens:
+        items:
+          $ref: '#/definitions/gateway_genprotos_order_pb.Allergens'
+        type: array
+      dietary_info:
+        items:
+          $ref: '#/definitions/gateway_genprotos_order_pb.DietaryInfo'
+        type: array
+      dish_id:
+        type: string
+      name:
+        type: string
+      nutrition_info:
+        items:
+          $ref: '#/definitions/gateway_genprotos_order_pb.NutritionInfo'
+        type: array
+      updated_at:
+        type: string
+    type: object
+  gateway_genprotos_order_pb.UpdateDishRequest:
+    properties:
+      available:
+        type: boolean
+      category:
+        type: string
+      description:
+        type: string
+      dish_id:
+        type: string
+      ingredients:
+        items:
+          type: string
+        type: array
+      kitchen_id:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+    type: object
+  gateway_genprotos_order_pb.UpdateDishResponse:
+    properties:
+      available:
+        type: boolean
+      category:
+        type: string
+      description:
+        type: string
+      dish_id:
+        type: string
+      ingredients:
+        items:
+          type: string
+        type: array
+      kitchen_id:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+      updated_at:
+        type: string
+    type: object
+  gateway_genprotos_order_pb.UpdateOrderStatusRequest:
+    properties:
+      order_id:
+        type: string
+      status:
+        type: string
+    type: object
+  gateway_genprotos_order_pb.UpdateOrderStatusResponse:
+    properties:
+      order_id:
+        type: string
+      status:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  gateway_genprotos_order_pb.WorkingHoursByDay:
+    properties:
+      close_time:
+        type: string
+      day:
+        type: string
+      open_time:
+        type: string
+    type: object
+  gin.H:
+    additionalProperties: {}
+    type: object
+host: localhost:8080
 info:
-  contact: {}
-paths: {}
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: API Endpoints for LocalEats
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: LocalEats API
+  version: "1.0"
+paths:
+  /auth/is-valid-token/{user_id}:
+    get:
+      consumes:
+      - application/json
+      description: Checks if a user's token is valid
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_auth_pb.IsValidTokenResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Check token validity
+      tags:
+      - auth
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticates a user and returns a token
+      parameters:
+      - description: Login credentials
+        in: body
+        name: loginRequest
+        required: true
+        schema:
+          $ref: '#/definitions/gateway_genprotos_auth_pb.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_auth_pb.LoginResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Login user
+      tags:
+      - auth
+  /auth/logout/{user_id}:
+    post:
+      consumes:
+      - application/json
+      description: Logs out a user by their user ID
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_auth_pb.LogoutResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Logout user
+      tags:
+      - auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Register a new user in the system
+      parameters:
+      - description: Registration details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/gateway_genprotos_auth_pb.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful registration response
+          schema:
+            $ref: '#/definitions/gateway_genprotos_auth_pb.RegisterResponse'
+        "400":
+          description: Bad request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Register a new user
+      tags:
+      - auth
+  /auth/reset-password-access:
+    post:
+      consumes:
+      - application/json
+      description: Send a verification code to the user's email for password reset
+      parameters:
+      - description: User email
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/gateway_genprotos_auth_pb.IsValidUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gin.H'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get access to reset password
+      tags:
+      - auth
+  /dish:
+    post:
+      consumes:
+      - application/json
+      description: Add a new dish to the menu
+      parameters:
+      - description: Dish details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/gateway_genprotos_order_pb.AddDishRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_order_pb.AddDishResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Add a new dish
+      tags:
+      - dish
+  /dish/{dish_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an existing dish
+      parameters:
+      - description: Dish ID
+        in: path
+        name: dish_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_order_pb.DeleteDishResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Delete a dish
+      tags:
+      - dish
+    put:
+      consumes:
+      - application/json
+      description: Update an existing dish's details
+      parameters:
+      - description: Dish ID
+        in: path
+        name: dish_id
+        required: true
+        type: string
+      - description: Updated dish details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/gateway_genprotos_order_pb.UpdateDishRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_order_pb.UpdateDishResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Update a dish
+      tags:
+      - dish
+  /dish/{dish_id}/nutrition:
+    put:
+      consumes:
+      - application/json
+      description: Update nutrition information for a specific dish
+      parameters:
+      - description: Dish ID
+        in: path
+        name: dish_id
+        required: true
+        type: string
+      - description: Nutrition info update request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/gateway_genprotos_order_pb.UpdateDishNutritionInfoRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_order_pb.UpdateDishNutritionInfoResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Update dish nutrition info
+      tags:
+      - dish
+  /dish/kitchen/{kitchen_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get a list of dishes for a specific kitchen
+      parameters:
+      - description: Kitchen ID
+        in: path
+        name: kitchen_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_order_pb.ListDishesResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: List dishes
+      tags:
+      - dish
+  /kitchen:
+    post:
+      consumes:
+      - application/json
+      description: Create a new kitchen with the provided details
+      parameters:
+      - description: Kitchen creation details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/gateway_genprotos_auth_pb.CreateKitchenRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_auth_pb.CreateKitchenResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Create a new kitchen
+      tags:
+      - kitchen
+  /kitchen/{kitchen_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get details of a specific kitchen by ID
+      parameters:
+      - description: Kitchen ID
+        in: path
+        name: kitchen_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_auth_pb.GetKitchenResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get kitchen details
+      tags:
+      - kitchen
+    put:
+      consumes:
+      - application/json
+      description: Update an existing kitchen's details
+      parameters:
+      - description: Kitchen ID
+        in: path
+        name: kitchen_id
+        required: true
+        type: string
+      - description: Updated kitchen details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/gateway_genprotos_auth_pb.UpdateKitchenRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_auth_pb.UpdateKitchenResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Update a kitchen
+      tags:
+      - kitchen
+  /kitchen/{kitchen_id}/working-hours:
+    post:
+      consumes:
+      - application/json
+      description: Create working hours for a specific kitchen
+      parameters:
+      - description: Kitchen ID
+        in: path
+        name: kitchen_id
+        required: true
+        type: string
+      - description: Kitchen working hours details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/gateway_genprotos_order_pb.CreateKitchenWorkingHoursRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/gateway_genprotos_order_pb.CreateKitchenWorkingHoursResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Create kitchen working hours
+      tags:
+      - kitchen
+  /kitchen/list:
+    post:
+      consumes:
+      - application/json
+      description: Get a list of kitchens
+      parameters:
+      - description: List kitchens request parameters
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/gateway_genprotos_auth_pb.ListKitchensRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_auth_pb.ListKitchensResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: List kitchens
+      tags:
+      - kitchen
+  /kitchen/search:
+    post:
+      consumes:
+      - application/json
+      description: Search for kitchens based on provided criteria
+      parameters:
+      - description: Search criteria
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/gateway_genprotos_auth_pb.SearchKitchensRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_auth_pb.SearchKitchensResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Search kitchens
+      tags:
+      - kitchen
+  /order:
+    post:
+      consumes:
+      - application/json
+      description: Create a new order with the provided details
+      parameters:
+      - description: Order details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/gateway_genprotos_order_pb.CreateOrderRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_order_pb.CreateOrderResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Create a new order
+      tags:
+      - order
+  /order/{order_id}/status:
+    put:
+      consumes:
+      - application/json
+      description: Update the status of an existing order
+      parameters:
+      - description: Order ID
+        in: path
+        name: order_id
+        required: true
+        type: string
+      - description: Updated order status
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/gateway_genprotos_order_pb.UpdateOrderStatusRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_order_pb.UpdateOrderStatusResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Update order status
+      tags:
+      - order
+  /order/kitchen/{kitchen_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get orders for a specific kitchen
+      parameters:
+      - description: Kitchen ID
+        in: path
+        name: kitchen_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_order_pb.GetOrderByKitchenIdResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get orders for a kitchen
+      tags:
+      - order
+  /order/user/{user_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get a list of orders for a specific user
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_order_pb.ListOfOrdersResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: List orders for a user
+      tags:
+      - order
+  /payment:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new payment for an order using credit card information
+      parameters:
+      - description: Payment information
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/gateway_genprotos_order_pb.CreatePaymentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_order_pb.CreatePaymentResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Create a new payment
+      tags:
+      - payment
+  /review:
+    post:
+      consumes:
+      - application/json
+      description: Add a new review for a kitchen or order
+      parameters:
+      - description: Review details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/gateway_genprotos_order_pb.AddReviewRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_order_pb.AddReviewResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Add a new review
+      tags:
+      - review
+  /review/kitchen/{kitchen_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get a list of reviews for a specific kitchen
+      parameters:
+      - description: Kitchen ID
+        in: path
+        name: kitchen_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_order_pb.ListReviewsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: List reviews for a kitchen
+      tags:
+      - review
+  /user/{user_id}/activity:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve activity statistics for a specific user
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_order_pb.GetUserActivityResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get user activity
+      tags:
+      - user
+  /user/profile/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get the profile of a user by their ID
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_auth_pb.GetProfileResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get user profile
+      tags:
+      - user
+    put:
+      consumes:
+      - application/json
+      description: Update the profile of a user by their ID
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Updated profile information
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/gateway_genprotos_auth_pb.UpdateProfileRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_auth_pb.UpdateProfileResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Update user profile
+      tags:
+      - user
+  /user/reset-password:
+    post:
+      consumes:
+      - application/json
+      description: Reset the password for a user
+      parameters:
+      - description: Password reset information
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/gateway_genprotos_auth_pb.ResetPasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gateway_genprotos_auth_pb.ResetPasswordResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Reset user password
+      tags:
+      - user
+schemes:
+- http
+- https
+security:
+- BearerAuth: []
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"

@@ -9,6 +9,7 @@ import (
 type Config struct {
 	Server   ServerConfig
 	Database DatabaseConfig
+	ResetPassword ResetPasswordConfig
 }
 
 type ServerConfig struct {
@@ -25,6 +26,11 @@ type DatabaseConfig struct {
 	DBName   string
 }
 
+type ResetPasswordConfig struct {
+	From string
+	Password string
+}
+
 func (c *Config) Load() error {
 	err := godotenv.Load()
 	if err != nil {
@@ -39,6 +45,9 @@ func (c *Config) Load() error {
 	c.Database.User = os.Getenv("DB_USER")
 	c.Database.Password = os.Getenv("DB_PASSWORD")
 	c.Database.DBName = os.Getenv("DB_NAME")
+
+	c.ResetPassword.From = os.Getenv("RESET_PASSWORD_FROM")
+	c.ResetPassword.Password = os.Getenv("EMAIL_PASSWORD")
 
 	return nil
 }
