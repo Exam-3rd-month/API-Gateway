@@ -57,14 +57,14 @@ func New() *API {
 func (a *API) NewRouter(config *config.Config, logger *slog.Logger) *gin.Engine {
 	router := gin.Default()
 
-	// CORS configuration
-	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"*"},
-		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
-		AllowHeaders:     []string{"Origin", "Authorization", "Content-Type"},
-		ExposeHeaders:    []string{"Content-Length"},
-		AllowCredentials: true,
-	}))
+	// CORS konfiguratsiyasi
+	corsConfig := cors.DefaultConfig()
+	corsConfig.AllowAllOrigins = true
+	corsConfig.AllowCredentials = true
+	corsConfig.AllowHeaders = []string{"*"}
+	corsConfig.AllowBrowserExtensions = true
+	corsConfig.AllowMethods = []string{"*"}
+	router.Use(cors.New(corsConfig))
 
 	// Swagger
 	url := ginSwagger.URL("/swagger/doc.json")
@@ -138,7 +138,7 @@ func (a *API) NewRouter(config *config.Config, logger *slog.Logger) *gin.Engine 
 }
 
 func VerifyJWTMiddleware(ctx *gin.Context) {
-	if ctx.Request.URL.Path == "/auth/login" || ctx.Request.URL.Path == "/auth/register" ||ctx.Request.URL.Path == "/auth/reset-password-access"||ctx.Request.URL.Path == "/auth/reset-password" || strings.HasPrefix(ctx.Request.URL.Path, "/swagger") {
+	if ctx.Request.URL.Path == "/auth/login" || ctx.Request.URL.Path == "/auth/register" || ctx.Request.URL.Path == "/auth/reset-password-access" || ctx.Request.URL.Path == "/auth/reset-password" || strings.HasPrefix(ctx.Request.URL.Path, "/swagger") {
 		ctx.Next()
 		return
 	}
