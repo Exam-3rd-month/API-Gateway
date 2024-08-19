@@ -724,7 +724,7 @@ definitions:
   gin.H:
     additionalProperties: {}
     type: object
-host: localhost:8080
+host: 3.67.83.145:8080
 info:
   contact:
     email: support@swagger.io
@@ -736,7 +736,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: http://swagger.io/terms/
   title: LocalEats API
-  version: "1.0"
+  version: 1.03.67.83.145
 paths:
   /auth/is-valid-token/{user_id}:
     get:
