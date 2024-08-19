@@ -18,8 +18,9 @@ type HandlerConfig struct {
 	AuthHandler  *authhandler.AuthHandler
 }
 
-func connect(port string) *grpc.ClientConn {
-	conn, err := grpc.NewClient(port, grpc.WithTransportCredentials(insecure.NewCredentials()))
+func connect(host, port string) *grpc.ClientConn {
+	address := host + port
+	conn, err := grpc.NewClient(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -28,7 +29,7 @@ func connect(port string) *grpc.ClientConn {
 
 func NewHandlerConfig(logger *slog.Logger, config *config.Config) *HandlerConfig {
 	return &HandlerConfig{
-		OrderHandler: orderhandler.NewOrderHandler(logger, order_pb.NewOrderServiceClient(connect(config.Server.Order_Port))),
-		AuthHandler:  authhandler.NewAuthHandler(logger, auth_pb.NewAuthServiceClient(connect(config.Server.Auth_Port))),
+		OrderHandler: orderhandler.NewOrderHandler(logger, order_pb.NewOrderServiceClient(connect("auth", config.Server.Order_Port))),
+		AuthHandler:  authhandler.NewAuthHandler(config, logger, auth_pb.NewAuthServiceClient(connect("order", config.Server.Auth_Port))),
 	}
 }

@@ -2,6 +2,8 @@ package redis
 
 import (
 	"context"
+	"gateway/internal/config"
+
 	// pb "reservation_service/genproto/reservation"
 	"time"
 
@@ -9,9 +11,9 @@ import (
 	"github.com/redis/go-redis/v9"
 )
 
-func connectDB() *redis.Client {
+func connectDB(config *config.Config) *redis.Client {
 	rdb := redis.NewClient(&redis.Options{
-		Addr:     "localhost:6379",
+		Addr:     config.Redis.Host + ":" + config.Redis.Port,
 		Password: "",
 		DB:       0,
 	})
@@ -19,8 +21,8 @@ func connectDB() *redis.Client {
 	return rdb
 }
 
-func SaveVerificationCode(email string, code string, expiration time.Duration) error {
-	client := connectDB()
+func SaveVerificationCode(config *config.Config, email string, code string, expiration time.Duration) error {
+	client := connectDB(config)
 
 	ctx := context.Background()
 	err := client.Set(ctx, email, code, expiration).Err()
@@ -30,8 +32,8 @@ func SaveVerificationCode(email string, code string, expiration time.Duration) e
 	return nil
 }
 
-func GetVerificationCode(email string) (string, error) {
-	client := connectDB()
+func GetVerificationCode(config *config.Config, email string) (string, error) {
+	client := connectDB(config)
 
 	ctx := context.Background()
 	code, err := client.Get(ctx, email).Result()

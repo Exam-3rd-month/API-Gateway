@@ -7,28 +7,24 @@ import (
 )
 
 type Config struct {
-	Server   ServerConfig
-	Database DatabaseConfig
+	Server        ServerConfig
+	Redis         RedisConfig
 	ResetPassword ResetPasswordConfig
 }
 
 type ServerConfig struct {
 	GATEWAY_PORT string
-	Order_Port string
-	Auth_Port  string
-}
-
-type DatabaseConfig struct {
-	Host     string
-	Port     string
-	User     string
-	Password string
-	DBName   string
+	Order_Port   string
+	Auth_Port    string
 }
 
 type ResetPasswordConfig struct {
-	From string
+	From     string
 	Password string
+}
+type RedisConfig struct {
+	Host string
+	Port string
 }
 
 func (c *Config) Load() error {
@@ -40,12 +36,8 @@ func (c *Config) Load() error {
 	c.Server.GATEWAY_PORT = ":" + os.Getenv("GATEWAY_PORT")
 	c.Server.Order_Port = ":" + os.Getenv("ORDER_PORT")
 	c.Server.Auth_Port = ":" + os.Getenv("AUTH_PORT")
-	c.Database.Host = os.Getenv("DB_HOST")
-	c.Database.Port = os.Getenv("DB_PORT")
-	c.Database.User = os.Getenv("DB_USER")
-	c.Database.Password = os.Getenv("DB_PASSWORD")
-	c.Database.DBName = os.Getenv("DB_NAME")
-
+	c.Redis.Host = os.Getenv("REDIS_HOST")
+	c.Redis.Port = os.Getenv("REDIS_PORT")
 	c.ResetPassword.From = os.Getenv("RESET_PASSWORD_FROM")
 	c.ResetPassword.Password = os.Getenv("EMAIL_PASSWORD")
 

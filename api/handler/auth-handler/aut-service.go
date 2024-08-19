@@ -162,7 +162,7 @@ func (h *AuthHandler) ResetPasswordHandler(c *gin.Context) {
 		return
 	}
 
-	code, err := r.GetVerificationCode(req.Email)
+	code, err := r.GetVerificationCode(h.config, req.Email)
 	if err != nil {
 		c.IndentedJSON(400, gin.H{
 			"error": err.Error(),
@@ -288,7 +288,7 @@ func (h *AuthHandler) GetAccessToResetPassword(c *gin.Context) {
 		return
 	}
 
-	err = r.SaveVerificationCode(req.Email, code, 2*time.Minute)
+	err = r.SaveVerificationCode(h.config, req.Email, code, 2*time.Minute)
 	if err != nil {
 		c.IndentedJSON(500, gin.H{
 			"error": err.Error(),

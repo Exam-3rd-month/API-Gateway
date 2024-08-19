@@ -24,5 +24,5 @@ func main() {
 
 	api := api.New()
 
-	log.Fatal(api.NewRouter(configs, logger).Run(configs.Server.GATEWAY_PORT))
+	log.Fatal(api.NewRouter(configs, logger).Run("gateway" + configs.Server.GATEWAY_PORT))
 }
